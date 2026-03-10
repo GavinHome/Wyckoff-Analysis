@@ -1383,10 +1383,21 @@ def run(webhook_url: str) -> tuple[bool, list[dict], dict]:
             if smallcap_close is not None and smallcap_cum3 is not None
             else ""
         )
+
+        close_val = benchmark_context.get('close')
+        ma50_val = benchmark_context.get('ma50')
+        ma200_val = benchmark_context.get('ma200')
+        recent3_val = benchmark_context.get('recent3_cum_pct')
+        
+        close_val_text = None if close_val is None else f'{close_val:.2f}'
+        ma50_val_text = None if ma50_val is None else f'{ma50_val:.1f}'
+        ma200_val_text = None if ma200_val is None else f'{ma200_val:.1f}'
+        recent3_val_text = None if recent3_val is None else f'{recent3_val:+.2f}'
+        
         bench_line = (
-            f"{benchmark_context.get('regime')} | 沪深300 {benchmark_context.get('close'):.2f}"
-            f"（MA50={benchmark_context.get('ma50'):.1f} MA200={benchmark_context.get('ma200'):.1f}）"
-            f"，近3日 {benchmark_context.get('recent3_cum_pct'):+.2f}%"
+            f"{benchmark_context.get('regime')} | 沪深300 {close_val_text}"
+            f"（MA50={ma50_val_text} MA200={ma200_val_text}）"
+            f"，近3日 {recent3_val_text}%"
             f"{smallcap_text}"
             f"{breadth_text}{repair_text}"
         )
