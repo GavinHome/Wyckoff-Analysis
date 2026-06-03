@@ -79,8 +79,8 @@ jobs:
       STEP4_PROBE_BUDGET_LIMIT: "0.10"
       STEP4_ATTACK_BUDGET_LIMIT: "0.20"
       STEP4_BUY_BLOCK_REGIMES: "CRASH,BLACK_SWAN,RISK_OFF"
-      # 跳过 Step4（持仓再平衡），仅运行 Step2/Step3
-      DAILY_JOB_SKIP_STEP4: "1"
+      # Step4 再平衡开关：0=执行，1=跳过（从 vars/secrets 获取，默认执行）
+      DAILY_JOB_SKIP_STEP4: ${{ vars.DAILY_JOB_SKIP_STEP4 || secrets.DAILY_JOB_SKIP_STEP4 || '0' }}
       # AI 候选选择：正式 L4 全量进入 Step3，Trend/Accum 仅用于分轨研报。
       FUNNEL_AI_SELECTION_MODE: "all_formal_l4"
       FUNNEL_AI_TOTAL_CAP: "8"
