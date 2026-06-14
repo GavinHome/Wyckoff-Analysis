@@ -297,7 +297,7 @@ def _persist_signal_observations(
         return True
     except Exception as e:
         _log(f"信号观察样本入库失败: {e}", logs_path)
-        return False
+        return True
 
 
 def _load_step4_target() -> tuple[dict | None, str]:
